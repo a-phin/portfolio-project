@@ -1,12 +1,10 @@
 # Portfolio Part 1: Component Brainstorming
 
-- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) then delete this comment -->
-- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) then delete this comment -->
-- **Due Date**: <!-- TODO: fill with due date and time (e.g., 10/17 @ 3:10 PM EST) then delete this comment -->
+- **Name**: Angelina Phin
+- **Dot Number**: phin.5
+- **Due Date**: 02/06 @ 1:50 PM EST
 
 ## Assignment Overview
-
-<!-- TODO: read the assignment overview then delete this comment -->
 
 The overall goal of the portfolio project is to have you design and implement
 your own OSU component. There are no limits to what you choose to design and
@@ -29,8 +27,6 @@ implement.
 
 ## Assignment Checklist
 
-<!-- TODO: browse the checklist then delete this comment -->
-
 To be sure you have completed everything on this assignment, we have littered
 this document with TODO comments. You can browse all of them in VSCode by
 opening the TODOs window from the sidebar. The icon looks like a tree and will
@@ -52,8 +48,6 @@ to the tree diagram (you may remove this one as well):
 
 ## Assignment Learning Objectives
 
-<!-- TODO: read the assignment learning objectives then delete this comment -->
-
 Without learning objectives, there really is no clear reason why a particular
 assessment or activity exists. Therefore, to be completely transparent, here is
 what we're hoping you will learn through this particular aspect of the portfolio
@@ -67,12 +61,10 @@ project. Specifically, students should be able to:
 
 ## Assignment Rubric: 10 Points
 
-<!-- TODO: read the assignment rubric then delete this comment -->
-
 Again, to be completely transparent, most of the portfolio project, except the
 final submission, is designed as a formative assessment. Formative assessments
 are meant to provide ongoing feedback in the learning process. Therefore,
-the rubric is designed to assess the learning objectives *directly* in a way
+the rubric is designed to assess the learning objectives _directly_ in a way
 that is low stakes—meaning you shouldn't have to worry about the grade. Just
 do good work.
 
@@ -106,23 +98,23 @@ Below is further rationale/explanation for the rubric items above:
 > brainstorming. Plus it helps us get to know you better! Feel free to share
 > images in this section.
 
-<!-- TODO: briefly talk about your interests then delete this comment.
-Also, protip: you can preview what your response looks like by hitting
-the magnifying glass icon in the upper-right corner or pressing CTRL+K and
-then V. This kind of button combination is called a chord, for whatever
-reason -->
+My main interests are music, art and gaming. I typically listen to game soundtracks, anime music, and music you'd probably hear at raves (EDM, Trance, Hardstyle, etc), but I do listen to some rap and Lady Gaga on the side. I'm particularly interested in music composition and production; I've messed around with music notation programs (MuseScore) and MIDI programs (LMMS, Waveform, FL Studio) however I've never completed a single sheet music or song demo in either of those programs lmfao. I used to play piano, violin, and trombone; when I'm home I'll need to relearn piano + I really want to learn drums or guitar/bass.
+
+I'm also into art, mainly 3D modeling (and sometimes digital art). I have a bit of experience with Maya and C4D from a while back, but I mainly work with Blender (fun fact: the first time I used Blender was 2018, yes when I was 10. I was inspired by people making graphics for Roblox gulp). As much as the 3D modeling process is daunting, I enjoy learning new things and how I can combine different tools to make models look really good. Lighting and compositing is my expertise in my opinion. I would show a recent project I did with Blender, but I somehow lost my flash drive over the summer ugh.
+
+These days, I'm invested in playing rhythm games. I enjoy mobile rhythm games (e.g. Arcaea) and I'd love to frequent arcade rhythm games more often (e.g. CHUNITHM, maimai, SDVX) (like abolishing the D&B and putting a Round1 at the Polaris Mall so I don't have to travel 1.5 hours to Dayton). I don't play a lot of PC rhythm games but enjoy them when I have the time (e.g. ADOFAI or the upcoming In Falsus). Although I'm more focused on rhythm games, I'm also open to other game genres, like visual novels or tower defense.
+
+In addition, I enjoy coding and watching Twitch livestreams in my free time. I also enjoy spending time with my family and friends and going out whenever I can, exploring new places.
+
+As a CSE major, I'm interested in exploring the CG/game design (w/ previous 3D modeling experience, I'm interested in rendering and graphics), cybersecurity (I'm lowkey interested in having skillsets in reverse engineering/ethical hacking), and data analytics (I don't know why databases stick out to me) fields. I'm also interested in software engineering, but my 8AM SW1 class last semester kinda ruined it for me lol. One of my career goals is to take on a leadership role and mentor others, because I like to share my knowledge and passion for CS and other interests to help others grow. Another career goal I have is to expand my professional network and "put myself out there"; I have horrendous anxiety trying to get myself out there, and I'm trying to overcome it (I think).
 
 ## Assignment
-
-<!-- TODO: read the assignment section then delete this comment -->
 
 As previously stated, you are tasked with brainstorming 3 possible components.
 To aid you in this process, we have provided [some example components][example-components]
 that may help you in your brainstorming. All of these components were made at
 some point by one of your peers, so you should feel confident that you can
 accomplish any of them.
-
-<!-- TODO: browse the list of possible projects then delete this comment -->
 
 There is no requirement that you use any of the components listed above.
 If you want to model something else, go for it! Very common early object
@@ -142,8 +134,6 @@ list-like components that have different ways of manipulating the data. Think
 about different ways you might allow a client to manipulate your component.
 
 ### Example Component
-
-<!-- TODO: review this example component then delete this comment -->
 
 To help you brainstorm a few components, we've provided an example below of a
 component you already know well: NaturalNumber. We highly recommend that you
@@ -168,7 +158,7 @@ format, we can be more confident that your designs will be possible.
     - `NaturalNumber divide(NaturalNumber n)`: divides `this` by `n`, returning
       the remainder
     - ...
-  - **Additional Considerations** (*note*: "I don't know" is an acceptable
+  - **Additional Considerations** (_note_: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
       - Yes, basically all OSU components have to be mutable as long as they
@@ -180,7 +170,7 @@ format, we can be more confident that your designs will be possible.
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
       - Yes. NaturalNumber is base 10, and we track that in a constant called
-          `RADIX`.
+        `RADIX`.
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
       - Yes. The kernel methods `multiplyBy10` and `divideBy10` can be used to
@@ -211,68 +201,83 @@ will likely refine your design to make your implementation easier to use.
 
 > Please use this section to share your designs.
 
-- Component Design #1: <!-- TODO: give component a name then delete this comment -->
+- Component Design #1: `Chord`
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - The purpose of this component is to model a music chord. The design component contains kernel methods providing manipulation of the chord (+ identifying current size of chord), as well as additional information of the chord
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - `void insertNote(String n)`: inserts `n` to `this` (addNote can be overridden; may have a method w/ no parameter, which automatically adds a note that is 2nd of the highest existing note, or a method with an int parameter)
+    - `Chord removeNote(String n)`: removes a `Chord` object based on the value of `n` and reports the note
+    - `int size()`: reports size of `this`
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
-  - **Additional Considerations** (*note*: "I don't know" is an acceptable
+    - `Chord name()`: returns the name of `this`
+    - `String notes()`: returns the notes of `this`
+    - `String root()`: returns the root note of `this`
+  - **Additional Considerations** (_note_: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, `Chord` will inherit from Standard. `clear`, `newInstance`, and `transferFrom` will mutate `this`.
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - No, the `Chord` component can stand as its own class. Methods work with Chords, ints, and Strings.
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, `Chord` will need String constants (A flat, A, A# or A sharp, etc... to G/G#/G sharp) that is equivalent to Integer values correlated with these constants or Integer constants for vice versa.
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - No; secondary methods are methods that provide information about the chord. (This may change if I receive suggestions/ideas or have potential secondary methods in mind that involve manipulation of chords.)
 
-- Component Design #2: <!-- TODO: give component a name then delete this comment -->
+- Component Design #2: `MusicSequencer`
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - The purpose of this component is to provide a utility to generate sequences of notes. I made this component design to support Note objects and Chord (see #1) objects and integrate them into utility that is a simple "music notation-software-like program except it's technical as hell".
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - `void insert(N note)`: inserts `note` to `this`
+    - `void remove(N note)`: removes `note` from `this` (used void instead of a return type to mimic deletion of music notes) (**both insert and remove can be overriden**)
+    - `int length()`: reports length of `this`
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
-  - **Additional Considerations** (*note*: "I don't know" is an acceptable
+  // Could incorporate methods for adding repeats, time signatures, BPM, etc... (might be too technical)
+    - `void removeSequence(int start, int end)`: removes sequences of music notes/chords from the `start`ing note/chord to the `end`ing chord/note
+    - `void transpose(int o)`: transposes current sequence `o` octaves up/down
+  - **Additional Considerations** (_note_: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes. `this` would be mutated in different ways: adding/remove notes or chords to the existing sequence, or `clear`-ing the entire existing sequence.
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Maybe; there could be an internal class for each note/chord entry with information on the values, as well as for manipulating each entry individually (that may be a lot for a utility).
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Possibly constants for individual notes (e.g. see Component Design #1) and chords
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, one kernel method such as `remove` can support the `removeSequence` method. The `remove` method, if including iteration, will remove notes from `start` to `end`.
 
-- Component Design #3: <!-- TODO: give component a name then delete this comment -->
+- Component Design #3: `RhythmSong` (is there a better name for this...)
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - The purpose of this component is to model the organization of a rhythm game song select menu. The design reflects the OSU map component closely (e.g. using custom objects), except `RhythmSong` can also sort rhythm game songs in different ways.
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - `void insert(S song, C constant)`: inserts the pair (song, constant) to `this`
+    - `boolean containsSong(S song)`: reports whether there is an entry in `this` whose first component is `song`
+    - `RhythmSong.Entry<S, C> remove(S song)`: removes the entry whose first component is `song` and returns it
+    - `int size()`: reports size of `this` (the rhythm game song select menu)
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
-  - **Additional Considerations** (*note*: "I don't know" is an acceptable
+    - `void combineSongList(RhythmSong<S, C> rs)`: combines `rs` with `this`
+    - `RhythmSong showSongs(C constant)`: returns a new object with the same _dynamic_ type as `this` with `songs` with a value of `constant` (showSongs() may be overridden to show songs starting with a certain letter, e.g. 'A')
+    - `void sort(Comparator<T> order)`: sorts `this` according to the ordering provided by the compare method from `order`
+    - `boolean hasConstant(C constant)`: reports if there is an entry in `this` whose second component is `constant`
+    - `void replaceConstant(S song, C constant)`: replaces the constant associated with `song`
+  - **Additional Considerations** (_note_: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, `RhythmSong` will inherit from Standard and be mutable. Say if a song needs to be removed from the song selection menu (because of something like "licensing issues") and gets replaced with another song, I would need to get rid of the original song (`clear`) and replace it (`transferFrom`) with the new song with its new name and difficulty info. Methods will work with other `RhythmSong` objects.
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, there will be an internal class that takes an entry with a song name and difficulty to return that information in separate methods.
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Possibly, I may need constants that represent the song level difficulty and the song beatmap constant (represented as an Integer (e.g. 11) or String (e.g. 11+)). The song beatmap constant may be represented as C as well, to support Integer or String values.
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, kernel methods such as `insert` and `remove` can be used to manipulate `RhythmSong`. To implement `showSongs`, I would need to also use an iterator object to iterate through each entry in `RhythmSong` and check if an entry's second component is equivalent to `constant`, then which I would use `insert` to add the entry to the new `RhythmSong` object.
 
 ## Post-Assignment
 
@@ -299,13 +304,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
-## YYYY.MM.DD
+## 2026.02.05
 
 ### Added
 
-- Designed a <!-- insert name of component 1 here --> component
-- Designed a <!-- insert name of component 2 here --> component
-- Designed a <!-- insert name of component 3 here --> component
+- Designed a `Chord` component
+- Designed a `MusicSequencer` component
+- Designed a `RhythmSong` component
 ```
 
 Here `YYYY.MM.DD` would be the date of your submission, such as 2024.04.21.
