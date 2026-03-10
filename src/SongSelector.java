@@ -1,4 +1,4 @@
-
+import java.util.Comparator;
 
 /**
  * {@code SongSelectorKernel} enhanced with secondary methods.
