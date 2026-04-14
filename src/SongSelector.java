@@ -115,17 +115,12 @@ public interface SongSelector<Song> extends SongSelectorKernel<Song> {
      *            the constant replacing {@code oldConstant}
      * @aliases reference {@code constant}
      * @updates this
-     * @requires song is in DOMAIN(this) and oldConstant /= newConstant
+     * @requires title is in this and oldConstant /= newConstant
      * @ensures <pre>
      * this = (#this \ {(song, newConstant)}) union {(song, oldConstant)}
      * and (song, newConstant) is in #this
      * </pre>
      */
-<<<<<<< Updated upstream
-    void replaceConstant(S song, C oldConstant, C newConstant);
-}
-=======
     void replaceConstant(String title, int oldConstant, int newConstant);
 
 }
->>>>>>> Stashed changes
