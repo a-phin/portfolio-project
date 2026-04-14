@@ -62,8 +62,29 @@ public abstract class SongSelectorSecondary<S extends Comparable<S>, C extends C
         }
 
         @Override
+        public boolean equals(Object obj) {
+            if (obj == this) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (!(obj instanceof Entry<?, ?>)) {
+                return false;
+            }
+            Entry<?, ?> entry = (Entry<?, ?>) obj;
+            return this.song.equals(entry.song())
+                    && this.constant.equals(entry.constant());
+        }
+
+        @Override
+        public int hashCode() {
+            return this.song.hashCode() + this.constant.hashCode();
+        }
+
+        @Override
         public String toString() {
-            return this.song + " (" + this.constant + ")";
+            return this.song + " (" + this.constant + ") ";
         }
     }
 
