@@ -9,7 +9,8 @@ import components.standard.Standard;
  * @param <C>
  *            type of {@code SongSelectorKernel} range (constant) entries
  */
-public interface SongSelectorKernel<S, C> extends Standard<SongSelector<S, C>> {
+public interface SongSelectorKernel<S, C> extends Standard<SongSelector<S, C>>,
+        Iterable<SongSelector.Entry<S, C>> {
 
     /**
      * Inserts the pair ({@code song}, {@code constant}) to this.
@@ -61,5 +62,5 @@ public interface SongSelectorKernel<S, C> extends Standard<SongSelector<S, C>> {
      * @ensures size = |this|
      */
     int size();
-
+    
 }
