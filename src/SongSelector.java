@@ -1,5 +1,3 @@
-import java.util.Comparator;
-
 /**
  * {@code SongSelectorKernel} enhanced with secondary methods.
  *
@@ -45,6 +43,38 @@ public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
     }
 
     /**
+     * Song order sort choices when passed as a parameter to sortBySongName.
+     */
+    enum SongOrder {
+        /**
+         * When passed, sortBySongName sorts SongSelector in alphabetical order.
+         */
+        ATOZ,
+
+        /**
+         * When passed, sortBySongName sorts SongSelector in reverse
+         * alphabetical order.
+         */
+        ZTOA;
+    }
+
+    /**
+     * Constant order sort choices when passed as a parameter to sortByConstant.
+     */
+    enum ConstantOrder {
+        /**
+         * When passed, sortByConstant sorts SongSelector from the lowest
+         * constant value to the highest constant value.
+         */
+        LOWESTTOHIGHEST,
+        /**
+         * When passed, sortByConstant sorts SongSelector from the highest
+         * constant value to the lowest constant value.
+         */
+        HIGHESTTOLOWEST;
+    }
+
+    /**
      * Combines {@code sl} with {@code this}.
      *
      * @param sl
@@ -81,7 +111,7 @@ public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
      * IS_SORTED(this, [relation computed by order.compare method])
      * </pre>
      */
-    void sortBySongName(Comparator<S> order);
+    void sortBySongName(SongOrder order);
 
     /**
      * Sorts {@code this} according to the ordering provided by the compare
@@ -96,7 +126,7 @@ public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
      * IS_SORTED(this, [relation computed by order.compare method])
      * </pre>
      */
-    void sortByConstant(Comparator<C> order);
+    void sortByConstant(ConstantOrder order);
 
     /**
      * Reports if there is an entry in {@code this} whose second component is
@@ -128,4 +158,5 @@ public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
      * </pre>
      */
     void replaceConstant(S song, C oldConstant, C newConstant);
+    
 }
