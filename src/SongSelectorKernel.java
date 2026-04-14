@@ -66,9 +66,5 @@ public interface SongSelectorKernel<Song>
      * @ensures size = |this|
      */
     int size();
-<<<<<<< Updated upstream
-}
-=======
 
 }
->>>>>>> Stashed changes
