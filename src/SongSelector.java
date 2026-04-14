@@ -1,46 +1,10 @@
 /**
  * {@code SongSelectorKernel} enhanced with secondary methods.
  *
- * @param <S>
- *            type of {@code SongSelectorKernel} domain (song) entries
- * @param <C>
- *            type of {@code SongSelectorKernel} range (constant) entries
+ * @param <Song>
+ *            type of {@code SongSelector} entries
  */
-public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
-
-    /**
-     * A SongSelector entry (song-constant pair.) The only ways to obtain a
-     * SongSelector entry are from the iterator and {@code SongSelector}'s
-     * {@code remove} methods.
-     *
-     * @param <S>
-     *            type of {@code SongSelectorKernel} domain (song) entries
-     * @param <C>
-     *            type of {@code SongSelectorKernel} range (constant) entries
-     * @mathmodel type Entry is modeled by (song: S, constant: C)
-     * @initially <pre>
-     * (S song, C constant):
-     *  ensures
-     *   this = (song, constant)
-     * </pre>
-     */
-    interface Entry<S, C> {
-        /**
-         * Returns this {@code Entry}'s song.
-         *
-         * @return the song
-         * @aliases reference returned by {@code song}
-         */
-        S song();
-
-        /**
-         * Return this {@code Entry}'s constant.
-         *
-         * @return the constant
-         * @aliases reference returned by {@code constant}
-         */
-        C constant();
-    }
+public interface SongSelector<Song> extends SongSelectorKernel<Song> {
 
     /**
      * Song order sort choices when passed as a parameter to sortBySongName.
@@ -84,7 +48,7 @@ public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
      * @requires DOMAIN(this) intersection DOMAIN(sl) = {}
      * @ensures this = #this union #sl
      */
-    void combineSongList(SongSelector<S, C> sl);
+    void combineSongList(SongSelector<Song> sl);
 
     /**
      * Returns a new object with the same dynamic type as {@code this} with
@@ -96,7 +60,7 @@ public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
      * @requires constant is in RANGE(this)
      * @ensures showSongs = #showSongs union {song, constant}
      */
-    SongSelector<S, C> showSongs(C constant);
+    SongSelector<Song> showSongs(int constant);
 
     /**
      * Sorts {@code this} according to the ordering provided by the compare
@@ -138,24 +102,30 @@ public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
      *         is {@code constant}
      * @ensures hasConstant = (constant is in RANGE(this))
      */
-    boolean hasConstant(C constant);
+    boolean hasConstant(int constant);
 
     /**
      * Replaces the constant associated with {@code song}.
      *
-     * @param song
+     * @param title
      *            the song whose constant is replaced
      * @param oldConstant
-     *            the constant associated with {@code song} to be replaced
+     *            the constant associated with {@code title} to be replaced
      * @param newConstant
      *            the constant replacing {@code oldConstant}
      * @aliases reference {@code constant}
      * @updates this
-     * @requires song is in DOMAIN(this)
+     * @requires song is in DOMAIN(this) and oldConstant /= newConstant
      * @ensures <pre>
      * this = (#this \ {(song, newConstant)}) union {(song, oldConstant)}
      * and (song, newConstant) is in #this
      * </pre>
      */
+<<<<<<< Updated upstream
     void replaceConstant(S song, C oldConstant, C newConstant);
 }
+=======
+    void replaceConstant(String title, int oldConstant, int newConstant);
+
+}
+>>>>>>> Stashed changes
