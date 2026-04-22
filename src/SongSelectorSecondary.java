@@ -81,13 +81,22 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
         if (this.size() != ss.size()) {
             return false;
         }
+        for (Song s : this) {
+            if (!ss.containsSong(s)) {
+                return false;
+            }
+        }
         return true;
     }
 
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
     public int hashCode() {
-        return this.hashCode();
+        int value = 0;
+        for (Song s : this) {
+            value += s.hashCode();
+        }
+        return value;
     }
 
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
