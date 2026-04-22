@@ -57,7 +57,6 @@ public interface SongSelector<Song> extends SongSelectorKernel<Song> {
      * @param constant
      *            the constant whose associated songs are to be reported
      * @return {@code SongSelector} with songs that have {@code constant}
-     * @requires constant is in RANGE(this)
      * @ensures showSongs = #showSongs union {song, constant}
      */
     SongSelector<Song> showSongs(int constant);
@@ -107,20 +106,18 @@ public interface SongSelector<Song> extends SongSelectorKernel<Song> {
     /**
      * Replaces the constant associated with {@code song}.
      *
-     * @param title
+     * @param s
      *            the song whose constant is replaced
-     * @param oldConstant
-     *            the constant associated with {@code title} to be replaced
-     * @param newConstant
-     *            the constant replacing {@code oldConstant}
+     * @param constant
+     *            the constant replacing the current song constant
      * @aliases reference {@code constant}
      * @updates this
-     * @requires title is in this and oldConstant /= newConstant
+     * @requires title is in this, constant > 0 and constant /= newConstant
      * @ensures <pre>
      * this = (#this \ {(song, newConstant)}) union {(song, oldConstant)}
      * and (song, newConstant) is in #this
      * </pre>
      */
-    void replaceConstant(String title, int oldConstant, int newConstant);
+    void replaceConstant(Song s, int constant);
 
 }
