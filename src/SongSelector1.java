@@ -8,11 +8,9 @@ import components.list.List1L;
  * {@code SongSelector} represented as a {@link List} with implementations of
  * primary methods.
  *
- * @param <Song>
- *            type of {@code SongSelector} songs
  * @correspondence this = [value of $this]
  */
-public class SongSelector1<Song> extends SongSelectorSecondary<Song> {
+public class SongSelector1 extends SongSelectorSecondary {
 
     /*
      * Private members --------------------------------------------------------
@@ -85,12 +83,20 @@ public class SongSelector1<Song> extends SongSelectorSecondary<Song> {
     public final Song remove(Song s) {
         assert s != null : "Violation of: s is not null";
         // TODO - fill in body
+        return null;
     }
 
     @Override
-    public final boolean containsSong(String title) {
-        assert song != null : "Violation of: song is not null";
+    public final Song removeAny() {
         // TODO - fill in body
+        return null;
+    }
+
+    @Override
+    public final boolean containsSong(Song s) {
+        assert s != null : "Violation of: song is not null";
+        // TODO - fill in body
+        return true;
     }
 
     @Override
