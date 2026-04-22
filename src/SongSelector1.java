@@ -1,11 +1,11 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import components.list.List;
-import components.list.List1L;
+import components.set.Set;
+import components.set.Set1L;
 
 /**
- * {@code SongSelector} represented as a {@link List} with implementations of
+ * {@code SongSelector} represented as a {@link Set} with implementations of
  * primary methods.
  *
  * @correspondence this = [value of $this]
@@ -19,13 +19,13 @@ public class SongSelector1 extends SongSelectorSecondary {
     /**
      * Representation of {@code this}.
      */
-    private List<Song> rep;
+    private Set<Song> rep;
 
     /**
      * Creator of initial representation.
      */
     private void createNewRep() {
-        this.rep = new List1L<Song>();
+        this.rep = new Set1L<Song>();
     }
 
     /*
@@ -35,7 +35,7 @@ public class SongSelector1 extends SongSelectorSecondary {
     /**
      * No-argument constructor.
      */
-    public List1L() {
+    public SongSelector1() {
         this.createNewRep();
     }
 
@@ -45,7 +45,7 @@ public class SongSelector1 extends SongSelectorSecondary {
 
     @SuppressWarnings("unchecked")
     @Override
-    public final List<Song> newInstance() {
+    public final SongSelector newInstance() {
         try {
             return this.getClass().getConstructor().newInstance();
         } catch (ReflectiveOperationException e) {
@@ -60,11 +60,11 @@ public class SongSelector1 extends SongSelectorSecondary {
     }
 
     @Override
-    public final void transferFrom(List<Song> source) {
+    public final void transferFrom(SongSelector source) {
         assert source != null : "Violation of: source is not null";
         assert source != this : "Violation of: source is not this";
 
-        List1L<Song> localSource = (List1L<Song>) source;
+        SongSelector1 localSource = (SongSelector1) source;
         this.rep = localSource.rep;
         localSource.createNewRep();
     }
@@ -76,37 +76,38 @@ public class SongSelector1 extends SongSelectorSecondary {
     @Override
     public final void insert(Song s) {
         assert s != null : "Violation of: s is not null";
-        this.rep.addRightFront(s);
+        this.rep.add(s);
     }
 
     @Override
     public final Song remove(Song s) {
         assert s != null : "Violation of: s is not null";
-        // TODO - fill in body
-        return null;
+        Song x = this.rep.remove(s);
+        return x;
     }
 
     @Override
     public final Song removeAny() {
-        // TODO - fill in body
-        return null;
+        Iterator<Song> it = this.rep.iterator();
+        Song x = it.next();
+        it.remove();
+        return x;
     }
 
     @Override
     public final boolean containsSong(Song s) {
         assert s != null : "Violation of: song is not null";
-        // TODO - fill in body
-        return true;
+        return this.rep.contains(s);
     }
 
     @Override
     public final int size() {
-        return this.rep.leftLength() + this.rep.rightLength();
+        return this.rep.size();
     }
 
     @Override
     public final Iterator<Song> iterator() {
-        return new SongSelector1LIterator();
+        return new SongSelector1Iterator();
     }
 
     /**
