@@ -5,12 +5,8 @@ import java.util.List;
 
 /**
  * Layered implementations of secondary methods for {@code SongSelector}.
- *
- * @param <Song>
- *            type of {@code Song} songs
  */
-public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
-        implements SongSelector<Song> {
+public abstract class SongSelectorSecondary implements SongSelector {
 
     /*
      * Private members --------------------------------------------------------
@@ -57,7 +53,7 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
     protected static final class ConstantSort implements Comparator<Song> {
         @Override
         public int compare(Song o1, Song o2) {
-            return o1.constant().compareToIgnoreCase(o2.constant());
+            return o1.constant().compareTo(o2.constant());
         }
     }
 
@@ -74,10 +70,10 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof SongSelector<?>)) {
+        if (!(obj instanceof SongSelector)) {
             return false;
         }
-        SongSelector<?> ss = (SongSelector<?>) obj;
+        SongSelector ss = (SongSelector) obj;
         if (this.size() != ss.size()) {
             return false;
         }
@@ -104,7 +100,7 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
     public String toString() {
         StringBuilder result = new StringBuilder("<");
         for (Song s : this) {
-            result.append(" (" + s.song() + ", " + s.constant() + ") ");
+            result.append(" (" + s.title() + ", " + s.constant() + ") ");
         }
         result.append(">");
         return result.toString();
@@ -116,7 +112,7 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
 
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
-    public void combineSongList(SongSelector<Song> sl) {
+    public void combineSongList(SongSelector sl) {
         for (Song s : sl) {
             this.insert(s);
         }
@@ -125,8 +121,8 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
 
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
-    public SongSelector<Song> showSongs(int constant) {
-        SongSelector<Song> songsWithConstant = this.newInstance();
+    public SongSelector showSongs(int constant) {
+        SongSelector songsWithConstant = this.newInstance();
         for (Song s : this) {
             if (s.constant() == constant) {
                 songsWithConstant.insert(s);
@@ -169,7 +165,7 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
                 .constant() : "Violation of: constant is not equal to current constant";
 
         Song entry = this.remove(s);
-        entry.constant() = constant;
-        this.insert(entry);
+        Song sng = new Song(entry.title(), constant);
+        this.insert(sng);
     }
 }
