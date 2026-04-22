@@ -8,6 +8,7 @@ import components.set.Set1L;
  * {@code SongSelector} represented as a {@link Set} with implementations of
  * primary methods.
  *
+ * @convention for all s: Song where (s is in $this.rep), s.constant() > 0
  * @correspondence this = [value of $this]
  */
 public class SongSelector1 extends SongSelectorSecondary {
