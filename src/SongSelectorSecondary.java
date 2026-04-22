@@ -13,6 +13,31 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
         implements SongSelector<Song> {
 
     /*
+     * Private members --------------------------------------------------------
+     */
+
+    /**
+     * Helper method to sort songs.
+     *
+     * @param c
+     *            the comparator to sort by
+     * @param reverseOrder
+     *            indicates if ArrayList should be in reverse order
+     * @return a sorted ArrayList of all songs removed from {@code this}
+     */
+    private List<Song> customSort(Comparator<Song> c, boolean reverseOrder) {
+        List<Song> songs = new ArrayList<>();
+        while (this.size() > 0) {
+            songs.add(this.removeAny());
+        }
+        songs.sort(c);
+        if (reverseOrder) {
+            Collections.reverse(songs);
+        }
+        return songs;
+    }
+
+    /*
      * Protected members ------------------------------------------------------
      */
 
@@ -99,29 +124,6 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
             }
         }
         return songsWithConstant;
-    }
-
-    // TODO: this deletes all your songs
-    // You will have aliasing if you put them back first
-    /**
-     * Helper method to sort songs.
-     *
-     * @param c
-     *            the comparator to sort by
-     * @param reverseOrder
-     *            indicates if ArrayList should be in reverse order
-     * @return a sorted ArrayList of all songs removed from {@code this}
-     */
-    private List<Song> customSort(Comparator<Song> c, boolean reverseOrder) {
-        List<Song> songs = new ArrayList<>();
-        while (this.size() > 0) {
-            songs.add(this.removeAny());
-        }
-        songs.sort(c);
-        if (reverseOrder) {
-            Collections.reverse(songs);
-        }
-        return songs;
     }
 
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
