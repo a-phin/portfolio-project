@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Layered implementations of secondary methods for {@code SongSelector}.
@@ -14,33 +15,25 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
      * Protected members ------------------------------------------------------
      */
 
-    // /**
-    //  * Compare {@code String}s in lexicographic order.
-    //  *
-    //  * @param <S>
-    //  *            type of {@code SongSelector} domain (song) entries
-    //  */
-    // protected static final class SongLT<S extends Comparable<S>>
-    //         implements Comparator<S> {
-    //     @Override
-    //     public int compare(S o1, S o2) {
-    //         return o1.compareTo(o2);
-    //     }
-    // }
+    /**
+     * Compare {@code Song} titles in lexicographic order.
+     */
+    protected static final class titleSort implements Comparator<Song> {
+        @Override
+        public int compare(Song o1, Song o2) {
+            return o1.title().compareToIgnoreCase(o2.title());
+        }
+    }
 
-    // /**
-    //  * Compare {@code S}s in lexicographic order.
-    //  *
-    //  * @param <C>
-    //  *            type of {@code SongSelector} range (constant) entries
-    //  */
-    // protected static final class ConstantLT<C extends Comparable<C>>
-    //         implements Comparator<C> {
-    //     @Override
-    //     public int compare(C o1, C o2) {
-    //         return o1.compareTo(o2);
-    //     }
-    // }
+    /**
+     * Compare {@code Song} constants in lexicographic order.
+     */
+    protected static final class constantSort implements Comparator<Song> {
+        @Override
+        public int compare(Song o1, Song o2) {
+            return o1.constant().compareToIgnoreCase(o2.constant());
+        }
+    }
 
     /*
      * Common methods (from Object) -------------------------------------------
@@ -76,7 +69,7 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
     public String toString() {
         StringBuilder result = new StringBuilder("<");
         for (Song s : this) {
-            result.append(s.song() + ", " + s.constant());
+            result.append(" (" + s.song() + ", " + s.constant() + ") ");
         }
         result.append(">");
         return result.toString();
@@ -109,13 +102,30 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
 
     // TODO: this deletes all your songs
     // You will have aliasing if you put them back first
-    private List customSort(Comparator c) {
-        List<Entry<S, C>> songs = new ArrayList<>();
+    /**
+     * Helper method to sort songs.
+     *
+     * @param c
+     *            the comparator to sort by
+     * @return a sorted ArrayList of all songs removed from {@code this}
+     */
+    private List<Song> customSort(Comparator<Song> c) {
+        List<Song> songs = new ArrayList<>();
         while (this.size() > 0) {
             songs.add(this.removeAny());
         }
         songs.sort(c);
         return songs;
+    }
+
+    @Override
+    public void sort(Comparator<Song> order) {
+        assert order != null : "Violation of: order is not null";
+
+        List<Song> sortedSongs = this.customSort(order);
+        for (Song s : sortedSongs) {
+            this.insert(s);
+        }
     }
 
     // // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN

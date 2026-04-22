@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 /**
  * {@code SongSelectorKernel} enhanced with secondary methods.
  *
@@ -74,22 +76,7 @@ public interface SongSelector<Song> extends SongSelectorKernel<Song> {
      * IS_SORTED(this, [relation computed by order.compare method])
      * </pre>
      */
-    void sortBySongName(SongOrder order);
-
-    /**
-     * Sorts {@code this} according to the ordering provided by the compare
-     * method from {@code order}.
-     *
-     * @param order
-     *            ordering by which to sort the constants
-     * @updates this
-     * @requires IS_TOTAL_PREORDER([relation computed by order.compare] method)
-     * @ensures <pre>
-     * perms(this, #this) and
-     * IS_SORTED(this, [relation computed by order.compare method])
-     * </pre>
-     */
-    void sortByConstant(ConstantOrder order);
+    void sort(Comparator<Song> order);
 
     /**
      * Reports if there is an entry in {@code this} whose second component is
