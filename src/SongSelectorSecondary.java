@@ -53,7 +53,7 @@ public abstract class SongSelectorSecondary implements SongSelector {
     protected static final class ConstantSort implements Comparator<Song> {
         @Override
         public int compare(Song o1, Song o2) {
-            return o1.constant().compareTo(o2.constant());
+            return Integer.compare(o1.constant(), o2.constant());
         }
     }
 
