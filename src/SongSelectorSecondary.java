@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
     /**
      * Compare {@code Song} titles in lexicographic order.
      */
-    protected static final class titleSort implements Comparator<Song> {
+    protected static final class TitleSort implements Comparator<Song> {
         @Override
         public int compare(Song o1, Song o2) {
             return o1.title().compareToIgnoreCase(o2.title());
@@ -28,7 +29,7 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
     /**
      * Compare {@code Song} constants in lexicographic order.
      */
-    protected static final class constantSort implements Comparator<Song> {
+    protected static final class ConstantSort implements Comparator<Song> {
         @Override
         public int compare(Song o1, Song o2) {
             return o1.constant().compareToIgnoreCase(o2.constant());
@@ -107,83 +108,32 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
      *
      * @param c
      *            the comparator to sort by
+     * @param reverseOrder
+     *            indicates if ArrayList should be in reverse order
      * @return a sorted ArrayList of all songs removed from {@code this}
      */
-    private List<Song> customSort(Comparator<Song> c) {
+    private List<Song> customSort(Comparator<Song> c, boolean reverseOrder) {
         List<Song> songs = new ArrayList<>();
         while (this.size() > 0) {
             songs.add(this.removeAny());
         }
         songs.sort(c);
+        if (reverseOrder) {
+            Collections.reverse(songs);
+        }
         return songs;
     }
 
+    // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
-    public void sort(Comparator<Song> order) {
+    public void sort(Comparator<Song> order, boolean inReverseOrder) {
         assert order != null : "Violation of: order is not null";
 
-        List<Song> sortedSongs = this.customSort(order);
+        List<Song> sortedSongs = this.customSort(order, inReverseOrder);
         for (Song s : sortedSongs) {
             this.insert(s);
         }
     }
-
-    // // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
-    // @Override
-    // public void sortBySongName(SongOrder order) {
-    //     assert order != null : "Violation of: order is not null";
-    //     if (this.size() != 0) {
-    //         Comparator<S> ci = new ConstantLT<S>();
-    //         Iterator<Entry<S, C>> it = this.iterator();
-    //         Entry<S, C> entry = it.next();
-    //         while (it.hasNext()) {
-    //             Entry<S, C> nextEntry = it.next();
-    //             if (order.equals(SongOrder.ATOZ)) {
-    //                 if (ci.compare(entry.song(), nextEntry.song()) < 0) {
-    //                     entry = nextEntry;
-    //                 }
-    //             } else {
-    //                 if (ci.compare(entry.song(), nextEntry.song()) > 0) {
-    //                     entry = nextEntry;
-    //                 }
-    //             }
-    //         }
-    //         Entry<S, C> removedEntry = this.remove(entry.song(),
-    //                 entry.constant());
-    //         this.sortBySongName(order);
-    //         this.insert(removedEntry.song(), removedEntry.constant());
-    //     }
-    // }
-
-    // // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
-    // @Override
-    // public void sortByConstant(ConstantOrder order) {
-    //     assert order != null : "Violation of: order is not null";
-
-    //     if (this.size() != 0) {
-    //         Comparator<C> ci = new ConstantLT<C>();
-    //         Iterator<Entry<S, C>> it = this.iterator();
-    //         Entry<S, C> entry = it.next();
-    //         while (it.hasNext()) {
-    //             Entry<S, C> nextEntry = it.next();
-    //             if (order.equals(ConstantOrder.LOWESTTOHIGHEST)) {
-    //                 if (ci.compare(entry.constant(),
-    //                         nextEntry.constant()) < 0) {
-    //                     entry = nextEntry;
-    //                 }
-    //             } else {
-    //                 if (ci.compare(entry.constant(),
-    //                         nextEntry.constant()) > 0) {
-    //                     entry = nextEntry;
-    //                 }
-    //             }
-    //         }
-    //         Entry<S, C> removedEntry = this.remove(entry.song(),
-    //                 entry.constant());
-    //         this.sortByConstant(order);
-    //         this.insert(removedEntry.song(), removedEntry.constant());
-    //     }
-    // }
 
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override

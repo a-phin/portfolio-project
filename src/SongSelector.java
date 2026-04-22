@@ -69,6 +69,8 @@ public interface SongSelector<Song> extends SongSelectorKernel<Song> {
      *
      * @param order
      *            ordering by which to sort the songs
+     * @param inReverseOrder
+     *            indicates if song selector ordering should be in reverse order
      * @updates this
      * @requires IS_TOTAL_PREORDER([relation computed by order.compare method])
      * @ensures <pre>
@@ -76,7 +78,7 @@ public interface SongSelector<Song> extends SongSelectorKernel<Song> {
      * IS_SORTED(this, [relation computed by order.compare method])
      * </pre>
      */
-    void sort(Comparator<Song> order);
+    void sort(Comparator<Song> order, boolean inReverseOrder);
 
     /**
      * Reports if there is an entry in {@code this} whose second component is
