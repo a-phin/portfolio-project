@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Layered implementations of secondary methods for {@code SongSelector}.
@@ -11,82 +13,53 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
         implements SongSelector<Song> {
 
     /*
+     * Private members --------------------------------------------------------
+     */
+
+    /**
+     * Helper method to sort songs.
+     *
+     * @param c
+     *            the comparator to sort by
+     * @param reverseOrder
+     *            indicates if ArrayList should be in reverse order
+     * @return a sorted ArrayList of all songs removed from {@code this}
+     */
+    private List<Song> customSort(Comparator<Song> c, boolean reverseOrder) {
+        List<Song> songs = new ArrayList<>();
+        while (this.size() > 0) {
+            songs.add(this.removeAny());
+        }
+        songs.sort(c);
+        if (reverseOrder) {
+            Collections.reverse(songs);
+        }
+        return songs;
+    }
+
+    /*
      * Protected members ------------------------------------------------------
      */
 
-    // /**
-    //  * Straightforward implementation of {@code Entry} interface.
-    //  *
-    //  * @param <S>
-    //  *            type of {@code Entry} first entry ({@code SongSelector} song
-    //  *            entry)
-    //  * @param <C>
-    //  *            type of {@code Entry} second entry ({@code SongSelector}
-    //  *            constant entry)
-    //  */
-    // protected static final class SongEntry<S, C>
-    //         implements SongSelector.Entry<S, C> {
+    /**
+     * Compare {@code Song} titles in lexicographic order.
+     */
+    protected static final class TitleSort implements Comparator<Song> {
+        @Override
+        public int compare(Song o1, Song o2) {
+            return o1.title().compareToIgnoreCase(o2.title());
+        }
+    }
 
-    //     /**
-    //      * The song.
-    //      */
-    //     private final S song;
-    //     /**
-    //      * The constant.
-    //      */
-    //     private final C constant;
-
-    //     /**
-    //      * Constructor.
-    //      *
-    //      * @param song
-    //      *            the song
-    //      * @param constant
-    //      *            the constant
-    //      */
-    //     public SongEntry(S song, C constant) {
-    //         this.song = song;
-    //         this.constant = constant;
-    //     }
-
-    //     @Override
-    //     public S song() {
-    //         return this.song;
-    //     }
-
-    //     @Override
-    //     public C constant() {
-    //         return this.constant;
-    //     }
-    // }
-
-    // /**
-    //  * Compare {@code S}s in lexicographic order.
-    //  *
-    //  * @param <S>
-    //  *            type of {@code SongSelector} domain (song) entries
-    //  */
-    // protected static final class SongLT<S extends Comparable<S>>
-    //         implements Comparator<S> {
-    //     @Override
-    //     public int compare(S o1, S o2) {
-    //         return o1.compareTo(o2);
-    //     }
-    // }
-
-    // /**
-    //  * Compare {@code S}s in lexicographic order.
-    //  *
-    //  * @param <C>
-    //  *            type of {@code SongSelector} range (constant) entries
-    //  */
-    // protected static final class ConstantLT<C extends Comparable<C>>
-    //         implements Comparator<C> {
-    //     @Override
-    //     public int compare(C o1, C o2) {
-    //         return o1.compareTo(o2);
-    //     }
-    // }
+    /**
+     * Compare {@code Song} constants in lexicographic order.
+     */
+    protected static final class ConstantSort implements Comparator<Song> {
+        @Override
+        public int compare(Song o1, Song o2) {
+            return o1.constant().compareToIgnoreCase(o2.constant());
+        }
+    }
 
     /*
      * Common methods (from Object) -------------------------------------------
@@ -108,13 +81,22 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
         if (this.size() != ss.size()) {
             return false;
         }
+        for (Song s : this) {
+            if (!ss.containsSong(s)) {
+                return false;
+            }
+        }
         return true;
     }
 
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
     public int hashCode() {
-        return this.hashCode();
+        int value = 0;
+        for (Song s : this) {
+            value += s.hashCode();
+        }
+        return value;
     }
 
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
@@ -153,73 +135,16 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
         return songsWithConstant;
     }
 
-    // TODO: this deletes all your songs
-    // You will have aliasing if you put them back first
-    private List customSort(Comparator c) {
-        List<Entry<S, C>> songs = new ArrayList<>();
-        while (this.size() > 0) {
-            songs.add(this.removeAny());
+    // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
+    @Override
+    public void sort(Comparator<Song> order, boolean inReverseOrder) {
+        assert order != null : "Violation of: order is not null";
+
+        List<Song> sortedSongs = this.customSort(order, inReverseOrder);
+        for (Song s : sortedSongs) {
+            this.insert(s);
         }
-        songs.sort(c);
-        return songs;
     }
-
-    // // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
-    // @Override
-    // public void sortBySongName(SongOrder order) {
-    //     assert order != null : "Violation of: order is not null";
-    //     if (this.size() != 0) {
-    //         Comparator<S> ci = new ConstantLT<S>();
-    //         Iterator<Entry<S, C>> it = this.iterator();
-    //         Entry<S, C> entry = it.next();
-    //         while (it.hasNext()) {
-    //             Entry<S, C> nextEntry = it.next();
-    //             if (order.equals(SongOrder.ATOZ)) {
-    //                 if (ci.compare(entry.song(), nextEntry.song()) < 0) {
-    //                     entry = nextEntry;
-    //                 }
-    //             } else {
-    //                 if (ci.compare(entry.song(), nextEntry.song()) > 0) {
-    //                     entry = nextEntry;
-    //                 }
-    //             }
-    //         }
-    //         Entry<S, C> removedEntry = this.remove(entry.song(),
-    //                 entry.constant());
-    //         this.sortBySongName(order);
-    //         this.insert(removedEntry.song(), removedEntry.constant());
-    //     }
-    // }
-
-    // // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
-    // @Override
-    // public void sortByConstant(ConstantOrder order) {
-    //     assert order != null : "Violation of: order is not null";
-
-    //     if (this.size() != 0) {
-    //         Comparator<C> ci = new ConstantLT<C>();
-    //         Iterator<Entry<S, C>> it = this.iterator();
-    //         Entry<S, C> entry = it.next();
-    //         while (it.hasNext()) {
-    //             Entry<S, C> nextEntry = it.next();
-    //             if (order.equals(ConstantOrder.LOWESTTOHIGHEST)) {
-    //                 if (ci.compare(entry.constant(),
-    //                         nextEntry.constant()) < 0) {
-    //                     entry = nextEntry;
-    //                 }
-    //             } else {
-    //                 if (ci.compare(entry.constant(),
-    //                         nextEntry.constant()) > 0) {
-    //                     entry = nextEntry;
-    //                 }
-    //             }
-    //         }
-    //         Entry<S, C> removedEntry = this.remove(entry.song(),
-    //                 entry.constant());
-    //         this.sortByConstant(order);
-    //         this.insert(removedEntry.song(), removedEntry.constant());
-    //     }
-    // }
 
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
