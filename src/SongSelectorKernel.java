@@ -3,12 +3,9 @@ import components.standard.Standard;
 /**
  * Song selector kernel component with primary methods. (Note: by package-wide
  * convention, all references are non-null.)
- *
- * @param <Song>
- *            type of {@code SongSelectorKernel} songs
  */
-public interface SongSelectorKernel<Song>
-        extends Standard<SongSelector<Song>>, Iterable<Song> {
+public interface SongSelectorKernel
+        extends Standard<SongSelector>, Iterable<Song> {
 
     /**
      * Inserts {@code s} to this.

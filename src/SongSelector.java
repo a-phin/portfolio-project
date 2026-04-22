@@ -2,11 +2,8 @@ import java.util.Comparator;
 
 /**
  * {@code SongSelectorKernel} enhanced with secondary methods.
- *
- * @param <Song>
- *            type of {@code SongSelector} entries
  */
-public interface SongSelector<Song> extends SongSelectorKernel<Song> {
+public interface SongSelector extends SongSelectorKernel {
 
     /**
      * Combines {@code sl} with {@code this}.
@@ -18,7 +15,7 @@ public interface SongSelector<Song> extends SongSelectorKernel<Song> {
      * @requires DOMAIN(this) intersection DOMAIN(sl) = {}
      * @ensures this = #this union #sl
      */
-    void combineSongList(SongSelector<Song> sl);
+    void combineSongList(SongSelector sl);
 
     /**
      * Returns a new object with the same dynamic type as {@code this} with
@@ -29,7 +26,7 @@ public interface SongSelector<Song> extends SongSelectorKernel<Song> {
      * @return {@code SongSelector} with songs that have {@code constant}
      * @ensures showSongs = #showSongs union {song, constant}
      */
-    SongSelector<Song> showSongs(int constant);
+    SongSelector showSongs(int constant);
 
     /**
      * Sorts {@code this} according to the ordering provided by the compare
