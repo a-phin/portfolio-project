@@ -22,7 +22,7 @@ public interface SongSelectorKernel<Song>
     void insert(Song s);
 
     /**
-     * Removes the pair ({@code song}, {@code constant}) and returns it.
+     * Removes the {@code song} and returns it.
      *
      * @param s
      *            the song to be removed
