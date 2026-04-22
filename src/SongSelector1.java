@@ -43,7 +43,6 @@ public class SongSelector1 extends SongSelectorSecondary {
      * Standard methods -------------------------------------------------------
      */
 
-    @SuppressWarnings("unchecked")
     @Override
     public final SongSelector newInstance() {
         try {
