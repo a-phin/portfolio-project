@@ -77,8 +77,6 @@ public class SongSelector1 extends SongSelectorSecondary {
     public final void insert(Song s) {
         assert s != null : "Violation of: s is not null";
         assert !this.containsSong(s) : "Violation of: s is not in this";
-        assert !this.hasConstant(
-                s.constant()) : "Violation of: constant is not already in this";
         this.rep.add(s);
     }
 

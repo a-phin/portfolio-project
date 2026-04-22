@@ -14,6 +14,7 @@ public interface SongSelectorKernel
      *            the song to be inserted
      * @aliases references {@code s}
      * @updates this
+     * @requires s /= null and s is not in this
      * @ensures this = #this union {s}
      */
     void insert(Song s);
@@ -25,7 +26,7 @@ public interface SongSelectorKernel
      *            the song to be removed
      * @return the song removed
      * @updates this
-     * @requires song is in this
+     * @requires s /= null and s is in this
      * @ensures <pre>
      * this = #this \ {s} and
      * remove = s
