@@ -75,22 +75,23 @@ public class SongSelector1 extends SongSelectorSecondary {
     @Override
     public final void insert(Song s) {
         assert s != null : "Violation of: s is not null";
+        assert !this.containsSong(s) : "Violation of: s is not in this";
+        assert !this.hasConstant(
+                s.constant()) : "Violation of: constant is not already in this";
         this.rep.add(s);
     }
 
     @Override
     public final Song remove(Song s) {
         assert s != null : "Violation of: s is not null";
-        Song x = this.rep.remove(s);
-        return x;
+        assert this.containsSong(s) : "Violation of: s is in this";
+        return this.rep.remove(s);
     }
 
     @Override
     public final Song removeAny() {
-        Iterator<Song> it = this.rep.iterator();
-        Song x = it.next();
-        it.remove();
-        return x;
+        assert this.size() > 0 : "Violation of: |this| > 0";
+        return this.rep.removeAny();
     }
 
     @Override
