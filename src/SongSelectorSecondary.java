@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+
 /**
  * Layered implementations of secondary methods for {@code SongSelector}.
  *
@@ -12,53 +15,7 @@ public abstract class SongSelectorSecondary<Song extends Comparable<Song>>
      */
 
     // /**
-    //  * Straightforward implementation of {@code Entry} interface.
-    //  *
-    //  * @param <S>
-    //  *            type of {@code Entry} first entry ({@code SongSelector} song
-    //  *            entry)
-    //  * @param <C>
-    //  *            type of {@code Entry} second entry ({@code SongSelector}
-    //  *            constant entry)
-    //  */
-    // protected static final class SongEntry<S, C>
-    //         implements SongSelector.Entry<S, C> {
-
-    //     /**
-    //      * The song.
-    //      */
-    //     private final S song;
-    //     /**
-    //      * The constant.
-    //      */
-    //     private final C constant;
-
-    //     /**
-    //      * Constructor.
-    //      *
-    //      * @param song
-    //      *            the song
-    //      * @param constant
-    //      *            the constant
-    //      */
-    //     public SongEntry(S song, C constant) {
-    //         this.song = song;
-    //         this.constant = constant;
-    //     }
-
-    //     @Override
-    //     public S song() {
-    //         return this.song;
-    //     }
-
-    //     @Override
-    //     public C constant() {
-    //         return this.constant;
-    //     }
-    // }
-
-    // /**
-    //  * Compare {@code S}s in lexicographic order.
+    //  * Compare {@code String}s in lexicographic order.
     //  *
     //  * @param <S>
     //  *            type of {@code SongSelector} domain (song) entries
