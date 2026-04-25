@@ -1,4 +1,5 @@
 package components.songselector;
+
 import java.util.Comparator;
 
 /**
@@ -59,20 +60,24 @@ public interface SongSelector extends SongSelectorKernel {
     boolean hasConstant(int constant);
 
     /**
-     * Replaces the constant associated with {@code song}.
+     * Replaces the constant associated with {@code Song} and returns the Song
+     * with the old constant.
      *
-     * @param s
-     *            the song whose constant is replaced
-     * @param constant
+     * @param title
+     *            the song title whose constant will be replaced
+     * @param oldConstant
+     *            the old song constant currently associated with the title
+     * @param newConstant
      *            the constant replacing the current song constant
+     * @return the song with its title and old constant
      * @aliases reference {@code constant}
      * @updates this
      * @requires title is in this, constant > 0 and constant /= newConstant
      * @ensures <pre>
-     * this = (#this \ {(song, newConstant)}) union {(song, oldConstant)}
-     * and (song, newConstant) is in #this
+     * this = (#this \ {(title, oldConstant)}) union {(song, constant)}
+     * and (song, constant) is in #this
      * </pre>
      */
-    void replaceConstant(Song s, int constant);
+    Song replaceConstant(String title, int oldConstant, int newConstant);
 
 }

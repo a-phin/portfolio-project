@@ -1,7 +1,9 @@
 package components.songselector;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -146,12 +148,12 @@ public abstract class SongSelectorSecondary implements SongSelector {
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
     public boolean hasConstant(int constant) {
+        Iterator<Song> it = this.iterator();
         boolean containsConstant = false;
-        while (!containsConstant) {
-            for (Song s : this) {
-                if (s.constant() == constant) {
-                    containsConstant = true;
-                }
+        while (!containsConstant && it.hasNext()) {
+            Song s = it.next();
+            if (s.constant() == constant) {
+                containsConstant = true;
             }
         }
         return containsConstant;
@@ -159,14 +161,23 @@ public abstract class SongSelectorSecondary implements SongSelector {
 
     // CHECKSTYLE: ALLOW THIS METHOD TO BE OVERRIDDEN
     @Override
-    public void replaceConstant(Song s, int constant) {
-        assert s != null : "Violation of: s is not null";
-        assert constant > 0 : "Violation of: constant is greater than 0";
-        assert constant != s
-                .constant() : "Violation of: constant is not equal to current constant";
+    public Song replaceConstant(String title, int oldConstant,
+            int newConstant) {
+        assert title != null : "Violation of: title is not null";
+        assert newConstant > 0 : "Violation of: constant is greater than 0";
 
+        Iterator<Song> it = this.iterator();
+        // Initialize
+        Song s = new Song("", 0);
+        boolean songFound = false;
+        while (!songFound && it.hasNext()) {
+            s = it.next();
+            if (s.title().equals(title) && s.constant() == oldConstant) {
+                songFound = true;
+            }
+        }
         Song entry = this.remove(s);
-        Song sng = new Song(entry.title(), constant);
-        this.insert(sng);
+        this.insert(new Song(entry.title(), newConstant));
+        return entry;
     }
 }
