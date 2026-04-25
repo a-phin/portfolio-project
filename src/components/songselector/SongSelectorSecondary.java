@@ -168,7 +168,7 @@ public abstract class SongSelectorSecondary implements SongSelector {
         assert newConstant != oldConstant : "Violation of: newConstant is not equal to oldConstant";
 
         Iterator<Song> it = this.iterator();
-        // Initialize
+        // Initialize a new song with an empty title and constant 0
         Song s = new Song("", 0);
         boolean songFound = false;
         while (!songFound && it.hasNext()) {
