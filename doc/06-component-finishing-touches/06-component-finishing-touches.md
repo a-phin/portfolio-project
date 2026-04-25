@@ -1,8 +1,8 @@
 # Portfolio Part 6: Finishing Touches
 
-- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) and delete this comment -->
-- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) and delete this comment -->
-- **Due Date**: <!-- TODO: fill out with due date and time (e.g., 10/17 @ 3:10 PM EST) and delete this comment -->
+- **Name**: Angelina Phin
+- **Dot Number**: phin.5
+- **Due Date**: 04/24 @ 11:59 PM EST
 
 ## Assignment Overview
 
@@ -49,8 +49,6 @@ Many of these additional techniques are somewhat out of the scope of this
 course, but just knowing about them could set you up for long term success.
 
 ## Assignment Checklist
-
-<!-- TODO: browse the checklist then delete this comment -->
 
 To be sure you have completed everything on this assignment, we have littered
 this document with TODO comments. You can browse all of them in VSCode by
@@ -140,8 +138,6 @@ merges, you will need to pull the changes from main into your current branch
 to see them. If you don't like this workflow, you may try following the
 rebase strategies described [here](https://stackoverflow.com/questions/35790561/working-while-waiting-for-pending-pr)
 and [here](https://stackoverflow.com/questions/18021888/continue-working-on-a-git-branch-after-making-a-pull-request).
-
-<!-- TODO: make a new branch from main then delete this comment -->
 
 ## Assignment Tasks
 
@@ -307,18 +303,32 @@ Take some time to fill them out honestly.
 > complete the portfolio project, how much better (or worse) do you think you
 > understand software development and why?
 
-<!-- TODO: discuss -->
+After I've had a chance to complete the portfolio project, I believe I understand software development a lot better. I can resonate with the grip that the work done in-class fails to map to the real world; I could say that the entire software course sequence is structured to put us on "survival mode" and get us to push through all of these assignments without properly understanding the content/giving us a breather to digest the new information we learn. At least for me, I felt like was trying to meet demands (e.g. projects) without thoroughly understanding what I'm learning. That's just my quick rant about the course sequence though.
+
+Now that I was able to complete the portfolio project (with a breather of course), my software development knowledge feels more well-rounded now. I can say that although the projects helped me apply what I've learned in class (SW2 only), this project helped me bring new stuff I've learned + previous knowledge together. I really enjoyed watching myself go through the software development process on my own towards one of my main interests--rhythm gaming. I was able to watch myself lay out the component, add interfaces and classes, and create use cases and test it. Something I've also noticed every time for each part I've done was creating iterations of a certain portion of my component, which I found valuable because I would improve from my previous iteration of the component, especially when I was struggling with the abstract class.
 
 > Also, did the portfolio project surface any gaps in your own knowledge of
 > software development. If so, what are those gaps and how did you address them?
 
-<!-- TODO: discuss -->
+The portfolio project definitely surfaced gaps in my own software development knowledge. These gaps are mostly Java-oriented/programming concepts that didn't get to me until now. I want to specifically highlight the gaps I surfaced while working on the abstract class/sort method, since I ended up realizing I also would have to heavily refine my component to get what I wanted out of it.
+
+When first drafting my single sort method, I wasn't sure what parameters to take as there were two generic types the component would take (I originally had a single comparator); this led to me splitting the sort method into sortBySongName and sortByConstant, which would take an enum parameter that indicates the order for which either the song titles or constants would be sorted. I didn't really like how I implemented the methods so I lowkey complained in comments and sought help for it.
+
+A solution to the sorting method was using a helper method that took an ArrayList that sorts the songs, and then returns it back to the component's sort method. Taking a comparator would help too, but I was concerned about how the method would take a comparator if I had comparators for two generic types. That ended up being a separate issue that needed to be addressed lmao.
+
+When I was first building my component, it took two generic types, which I was not aware at the time could take any data type when creating this new data structure. I was looking for my component to take in a song title (String) and constant value (int or double), so I initially went for generic types at the time. Because taking generic types became an issue for implementing the sort method, I ended up storing the titles and constants in Song objects. This helped a lot because I specifically wanted titles and constants to be of a specific data type, rather than "any". Not only that, it made implementing the sort method and even Part 5 easier. I also found out that if I tried to pass "Song" as a generic type, which could take any type, it would hide the Song object. Therefore, I wiped out generic types completely from the component. The component would still work like a Set or something similar.
+
+Going back to sorting though, eventually I reverted back to a singular sort method (which thank god I wanted). I made two comparators for the Song object, which would compare the titles and constants. A boolean parameter can also be passed if the client wants to reverse SongSelector, and if so, the ArrayList in the helper method would reverse it.
+
+Lots of paragraphs here. Mostly, I figured out generic types took any data type and you could make an object to store specific data types rather than plugging it into generic types. Also learned that I could use an ArrayList to do the sorting job. I really just had a story for this question.
 
 > Finally, as a part of completing the portfolio project, to what extent has
 > your perspective of software development changed, if at all? In other words,
 > is software development something you still enjoy? If not, why not?
 
-<!-- TODO: discuss -->
+After completing this project, I'd say software development is something I still enjoy. Creativity is something I value a lot in my life, and you can make a lot of cool stuff through software development, which is why I was drawn into software dev in the first place. The problem solving aspect is something I don't enjoy a lot within the past few years I've been programming, but I've grown to somewhat appreciate it through the portfolio project. I've grown to have patience working through bugs and creating iterations of parts of my code, and it's invaluable to the software dev process that I will experience over and over again.
+
+I'd also even go as far as saying this project (and this course) restored my enjoyment for software dev. Software I sucked my passion out for CS and software dev for a good while. A lot of the stuff I learned in that course felt scattered and I couldn't piece things together; I also felt really miserable applying what I've learned to projects I have to do (and that I don't enjoy), without any room to breathe in between. Doing the portfolio project not only gave me an opportunity to create something from my interests, but I had time to digest what I've learned in Software II, realize why I like software dev, and also realizing the values that matter most to me when doing software dev stuff.
 
 > One of the challenges of completing the portfolio project is picking up a lot
 > of skills on your own. Some of these skills are, of course, software skills.
@@ -326,29 +336,38 @@ Take some time to fill them out honestly.
 > this process. Therefore, the first question is what skills did you pick up
 > through this process?
 
-<!-- TODO: discuss -->
+Through the portfolio project, some of the skills I picked up were: learning how to build and organize a data structure and breaking down big issues into smaller, manageable parts, being adaptive to changes, and being attentive to detail.
+
+Through designing my component, I learned how to build a data structure similar to the OSU components I've learned and used this past year from scratch. In regards to organization, I implemented methods that would organize the SongSelector when the client calls a method to sort it. Additionally, I've picked up the ability to break down large parts into smaller and manageable parts; it's easy for me to try to problem solve something huge, but for something such as me struggling with the sort method, I had to create additional methods (e.g. customSort and comparators) that would support the sort method that comes with the component.
+
+For soft skills, being adaptive to changes has been an important skill for me to pick up through this process. Regardless if a change I made was big or small, I would have to (1) quickly adjust my component as soon as I can and (2) make sure the component works with the changes. For example, having to get rid of generics and use a Song object prompted me to change of my component files as soon as possible, add/remove necessary removes, and ensure that it supports the Song object. Being attentive to detail is also an important skill I picked up; I'm always trying to ensure my component looks professionally created and there's minimal to zero errors for the entire component.
+
+I would also consider the ability to ideate and implement an idea under deadlines as a skill. That would just be the software development life cycle. I've went through the software development process in teams (e.g. Fundamentals of Engineering 1181), but this is my first time working through the process independently. I guess this is an achievement for myself; I tend to do stuff spontaneously, so being able to lock in through this process really helped me create a great component.
 
 > The follow-up question is: could you rephrase these skills you picked up
 > as bullet points that you could put on a resume? Try it below.
 
-<!-- TODO: discuss -->
+- Designed a custom song selector data structure component inspired by OSU components in Java
+- Created reusable methods for inserting, removing, sorting, etc. songs, presenting data structure organization
+- Demonstrated adaptability to code changes and strong attention to detail ensuring code quality and functionality
+- Gained hands-on experience with the software development cycle from ideation to implementation under deadlines
 
 > Next, how has working on this project affected your career trajectory?
 > In other words, do you now hate the topic you picked? Or, are you even more
 > interested in it? Both outcomes are valuable to your personal development.
 
-<!-- TODO: discuss -->
+The topic I picked for my component was a rhythm game song selection list, and after working on the portfolio project, I would say I'm even more interested in it now. I initially picked the topic because I liked how rhythm games presented information of the songs you could play -- such as displaying the album cover, title, artist, difficulties, etc. After made my own (simple-ish) rhythm game song selection list, I'm now more interested in a lot of stuff: how developers pick songs for their game, how they create a level (beatmap) for the song, how mechanics are incorporated, how/why songs get removed, and how song filters are made. Working on games is something I don't see myself pursuing in the near future; I'm just more interested now because I love rhythm games, and I keep up with rhythm game-related news through the media. If I wanted to do something for rhythm games though, I could make beatmaps at the most lol.
 
 > Finally, consider the skills you've picked up and your current career
 > trajectory. What are some things you could do to continue on your
 > career trajectory? Also, who are some mentors you could contact to help
 > you stay on your path?
 
-<!-- TODO: discuss -->
+One thing I could do to continue on my career trajectory is continuing to create meaningful projects similar to the portfolio project. I have a lot of ideas in my head that I just don't get to implement, so even if I think it'll take a while for me to fully implement these ideas, I could always start, and come back to iterate them when I have to. I also need to start coding more frequently in my life lol. Aside from projects, I could open up LeetCode or CodingBat and and solve something at least twice a day. Something else I could do to continue on my trajectory is getting involved in hackathons; these events would help me pick up skills quickly and allow me to try to create something meaningful that solves a problem.
+
+Some mentors I could contact that could help me stay on my path are my professors, my advisors, upperclassmen friends and alumni I know. I could also reach out to industry representatives that get on campus for networking events as well. I would contact these mentors for software dev-related questions, or general career advice that could help me stay on my path.
 
 ### Changelog
-
-<!-- TODO: update CHANGELOG then delete this comment -->
 
 At the end of every assignment, you should update the
 [CHANGELOG.md](../../CHANGELOG.md) file found in the root of the project folder.
@@ -363,17 +382,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
-## YYYY.MM.DD
+## 2026.04.24
 
 ### Added
 
-- Designed test suite for <!-- insert name of component here --> component
-- Designed two different use cases for <!-- insert name of component here --> component
+- Designed test suite for SongSelector component
+- Designed two different use cases for SongSelector component
 
 ### Updated
 
-- Changed design to include ...
-
+- Changed `replaceConstant()` method to take `title`, `oldConstant`, and `newConstant` parameters
+- `hasConstant()` modified to use iterator to check for constant
 ```
 
 Here `YYYY.MM.DD` would be the date of your submission, such as 2024.04.21.
@@ -383,8 +402,6 @@ like to accomplish that, you will need to make GitHub releases after each pull
 request merge (or at least tag your commits). This is not required.
 
 ### Submission
-
-<!-- TODO: read the submission instructions then delete this comment -->
 
 Assuming that your project is in a GitHub repo somewhere and your changes are on
 a proof-of-concept branch, then what we'll want you to do is create a pull
