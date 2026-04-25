@@ -35,13 +35,13 @@ public abstract class SongSelectorSecondary implements SongSelector {
     }
 
     /*
-     * Protected members ------------------------------------------------------
+     * Public members ------------------------------------------------------
      */
 
     /**
      * Compare {@code Song} titles in lexicographic order.
      */
-    protected static final class TitleSort implements Comparator<Song> {
+    public static final class TitleSort implements Comparator<Song> {
         @Override
         public int compare(Song o1, Song o2) {
             return o1.title().compareToIgnoreCase(o2.title());
@@ -51,7 +51,7 @@ public abstract class SongSelectorSecondary implements SongSelector {
     /**
      * Compare {@code Song} constants in lexicographic order.
      */
-    protected static final class ConstantSort implements Comparator<Song> {
+    public static final class ConstantSort implements Comparator<Song> {
         @Override
         public int compare(Song o1, Song o2) {
             return Integer.compare(o1.constant(), o2.constant());
