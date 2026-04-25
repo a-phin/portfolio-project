@@ -68,7 +68,6 @@ public interface SongSelector extends SongSelectorKernel {
      * @param newConstant
      *            the constant replacing the current song constant
      * @return the song with its title and old constant
-     * @aliases reference {@code constant}
      * @updates this
      * @requires title is in this, constant > 0 and constant /= newConstant
      * @ensures <pre>
