@@ -14,8 +14,7 @@ public interface SongSelector extends SongSelectorKernel {
      *            the {@code SongSelector} to be combined with {@code this}
      * @updates this
      * @clears sl
-     * @requires DOMAIN(this) intersection DOMAIN(sl) = {}
-     * @ensures this = #this union #sl
+     * @ensures this = #this * #sl
      */
     void combineSongList(SongSelector sl);
 
@@ -53,9 +52,8 @@ public interface SongSelector extends SongSelectorKernel {
      *
      * @param constant
      *            the constant to be checked
-     * @return true iff there is a pair in {@code this} whose second component
-     *         is {@code constant}
-     * @ensures hasConstant = (constant is in RANGE(this))
+     * @return true iff song is in {@code this}
+     * @ensures hasConstant = (constant is in this)
      */
     boolean hasConstant(int constant);
 

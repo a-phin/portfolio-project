@@ -165,6 +165,7 @@ public abstract class SongSelectorSecondary implements SongSelector {
             int newConstant) {
         assert title != null : "Violation of: title is not null";
         assert newConstant > 0 : "Violation of: constant is greater than 0";
+        assert newConstant != oldConstant : "Violation of: newConstant is not equal to oldConstant";
 
         Iterator<Song> it = this.iterator();
         // Initialize
