@@ -1,13 +1,14 @@
 package components.songselector;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import components.set.Set;
-import components.set.Set1L;
+import components.sequence.Sequence;
+import components.sequence.Sequence1L;
 
 /**
- * {@code SongSelector} represented as a {@link Set} with implementations of
- * primary methods.
+ * {@code SongSelector} represented as a {@link Sequence} with implementations
+ * of primary methods.
  *
  * @convention for all s: Song where (s is in $this.rep), s.constant() > 0
  * @correspondence this = [value of $this]
@@ -21,13 +22,13 @@ public class SongSelector1 extends SongSelectorSecondary {
     /**
      * Representation of {@code this}.
      */
-    private Set<Song> rep;
+    private Sequence<Song> rep;
 
     /**
      * Creator of initial representation.
      */
     private void createNewRep() {
-        this.rep = new Set1L<Song>();
+        this.rep = new Sequence1L<Song>();
     }
 
     /*
@@ -78,31 +79,43 @@ public class SongSelector1 extends SongSelectorSecondary {
     public final void insert(Song s) {
         assert s != null : "Violation of: s is not null";
         assert !this.containsSong(s) : "Violation of: s is not in this";
-        this.rep.add(s);
+        this.rep.add(this.rep.length(), s);
     }
 
     @Override
     public final Song remove(Song s) {
         assert s != null : "Violation of: s is not null";
         assert this.containsSong(s) : "Violation of: s is in this";
-        return this.rep.remove(s);
+        int index = 0;
+        while (!this.rep.entry(index).equals(s)) {
+            index++;
+        }
+        return this.rep.remove(index);
     }
 
     @Override
     public final Song removeAny() {
         assert this.size() > 0 : "Violation of: |this| > 0";
-        return this.rep.removeAny();
+        return this.rep.remove(0);
     }
 
     @Override
     public final boolean containsSong(Song s) {
         assert s != null : "Violation of: song is not null";
-        return this.rep.contains(s);
+        boolean containsSong = false;
+        int index = 0;
+        while (!containsSong && index < this.rep.length()) {
+            if (this.rep.entry(index).equals(s)) {
+                containsSong = true;
+            }
+            index++;
+        }
+        return containsSong;
     }
 
     @Override
     public final int size() {
-        return this.rep.size();
+        return this.rep.length();
     }
 
     @Override

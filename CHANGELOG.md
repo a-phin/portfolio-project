@@ -17,6 +17,7 @@ the following form: YYYY.0M.0D.
 
 - Changed `replaceConstant()` method to take `title`, `oldConstant`, and `newConstant` parameters
 - `hasConstant()` modified to use iterator to check for constant
+- Sequence component is the updated representation for SongSelector. Identifying the initial representation as Set was a grave mistake. Kernel implementations modified
 
 ## 2026.04.22
 
