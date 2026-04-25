@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
+## 2026.04.24
+
+### Added
+
+- Designed test suite for SongSelector component
+- Designed two different use cases for SongSelector component
+
+### Updated
+
+- Changed `replaceConstant()` method to take `title`, `oldConstant`, and `newConstant` parameters
+- `hasConstant()` modified to use iterator to check for constant
+
 ## 2026.04.22
 
 ### Added
