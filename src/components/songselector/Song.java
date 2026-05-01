@@ -1,3 +1,4 @@
+package components.songselector;
 /**
  * Song object.
  *

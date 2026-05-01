@@ -1,3 +1,5 @@
+package components.songselector;
+
 import java.util.Comparator;
 
 /**
@@ -12,8 +14,7 @@ public interface SongSelector extends SongSelectorKernel {
      *            the {@code SongSelector} to be combined with {@code this}
      * @updates this
      * @clears sl
-     * @requires DOMAIN(this) intersection DOMAIN(sl) = {}
-     * @ensures this = #this union #sl
+     * @ensures this = #this * #sl
      */
     void combineSongList(SongSelector sl);
 
@@ -51,27 +52,29 @@ public interface SongSelector extends SongSelectorKernel {
      *
      * @param constant
      *            the constant to be checked
-     * @return true iff there is a pair in {@code this} whose second component
-     *         is {@code constant}
-     * @ensures hasConstant = (constant is in RANGE(this))
+     * @return true iff song is in {@code this}
+     * @ensures hasConstant = (constant is in this)
      */
     boolean hasConstant(int constant);
 
     /**
-     * Replaces the constant associated with {@code song}.
+     * Replaces the constant associated with {@code Song} and returns the Song
+     * with the old constant.
      *
-     * @param s
-     *            the song whose constant is replaced
-     * @param constant
+     * @param title
+     *            the song title whose constant will be replaced
+     * @param oldConstant
+     *            the old song constant currently associated with the title
+     * @param newConstant
      *            the constant replacing the current song constant
-     * @aliases reference {@code constant}
+     * @return the song with its title and old constant
      * @updates this
      * @requires title is in this, constant > 0 and constant /= newConstant
      * @ensures <pre>
-     * this = (#this \ {(song, newConstant)}) union {(song, oldConstant)}
-     * and (song, newConstant) is in #this
+     * this = (#this \ {(title, oldConstant)}) union {(song, constant)}
+     * and (song, constant) is in #this
      * </pre>
      */
-    void replaceConstant(Song s, int constant);
+    Song replaceConstant(String title, int oldConstant, int newConstant);
 
 }
