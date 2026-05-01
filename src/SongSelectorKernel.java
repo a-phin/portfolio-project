@@ -3,12 +3,9 @@ import components.standard.Standard;
 /**
  * Song selector kernel component with primary methods. (Note: by package-wide
  * convention, all references are non-null.)
- *
- * @param <Song>
- *            type of {@code SongSelectorKernel} songs
  */
-public interface SongSelectorKernel<Song>
-        extends Standard<SongSelector<Song>>, Iterable<Song> {
+public interface SongSelectorKernel
+        extends Standard<SongSelector>, Iterable<Song> {
 
     /**
      * Inserts {@code s} to this.
@@ -17,6 +14,7 @@ public interface SongSelectorKernel<Song>
      *            the song to be inserted
      * @aliases references {@code s}
      * @updates this
+     * @requires s /= null and s is not in this
      * @ensures this = #this union {s}
      */
     void insert(Song s);
@@ -28,7 +26,7 @@ public interface SongSelectorKernel<Song>
      *            the song to be removed
      * @return the song removed
      * @updates this
-     * @requires song is in this
+     * @requires s /= null and s is in this
      * @ensures <pre>
      * this = #this \ {s} and
      * remove = s

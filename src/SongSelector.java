@@ -2,43 +2,8 @@ import java.util.Comparator;
 
 /**
  * {@code SongSelectorKernel} enhanced with secondary methods.
- *
- * @param <Song>
- *            type of {@code SongSelector} entries
  */
-public interface SongSelector<Song> extends SongSelectorKernel<Song> {
-
-    /**
-     * Song order sort choices when passed as a parameter to sortBySongName.
-     */
-    enum SongOrder {
-        /**
-         * When passed, sortBySongName sorts SongSelector in alphabetical order.
-         */
-        ATOZ,
-
-        /**
-         * When passed, sortBySongName sorts SongSelector in reverse
-         * alphabetical order.
-         */
-        ZTOA;
-    }
-
-    /**
-     * Constant order sort choices when passed as a parameter to sortByConstant.
-     */
-    enum ConstantOrder {
-        /**
-         * When passed, sortByConstant sorts SongSelector from the lowest
-         * constant value to the highest constant value.
-         */
-        LOWESTTOHIGHEST,
-        /**
-         * When passed, sortByConstant sorts SongSelector from the highest
-         * constant value to the lowest constant value.
-         */
-        HIGHESTTOLOWEST;
-    }
+public interface SongSelector extends SongSelectorKernel {
 
     /**
      * Combines {@code sl} with {@code this}.
@@ -50,7 +15,7 @@ public interface SongSelector<Song> extends SongSelectorKernel<Song> {
      * @requires DOMAIN(this) intersection DOMAIN(sl) = {}
      * @ensures this = #this union #sl
      */
-    void combineSongList(SongSelector<Song> sl);
+    void combineSongList(SongSelector sl);
 
     /**
      * Returns a new object with the same dynamic type as {@code this} with
@@ -61,7 +26,7 @@ public interface SongSelector<Song> extends SongSelectorKernel<Song> {
      * @return {@code SongSelector} with songs that have {@code constant}
      * @ensures showSongs = #showSongs union {song, constant}
      */
-    SongSelector<Song> showSongs(int constant);
+    SongSelector showSongs(int constant);
 
     /**
      * Sorts {@code this} according to the ordering provided by the compare

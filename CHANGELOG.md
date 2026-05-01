@@ -11,17 +11,20 @@ the following form: YYYY.0M.0D.
 ### Added
 
 - `sort()` method to `SongSelector` and `SongSelectorSecondary`
+- Designed kernel implementation for SongSelector component
 
 ### Updated
 
 - Removed `sortBySongName()` and `sortByConstant()` methods, merged into singular `sort()` method that sorts both by song title and constant value. Back at square one
 - Common methods `equals()`, `hashCode()` and `toString()` fully implemented
+- Fully got rid of generic types across SongSelector src files
 
 ## 2026.04.14
 
 ### Added
 
-- Helper method `customSort()` to support the `SongSelector` sorting methods
+- Helper method `customSort()` to support the SongSelector sorting methods
+- `removeAny()` method added to interface
 - Created a `Song` record that takes song title and constant parameters
 
 ### Updated
