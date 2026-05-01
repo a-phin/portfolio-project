@@ -6,6 +6,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
+## 2026.04.22
+
+### Added
+
+- `sort()` method to `SongSelector` and `SongSelectorSecondary`
+
+### Updated
+
+- Removed `sortBySongName()` and `sortByConstant()` methods, merged into singular `sort()` method that sorts both by song title and constant value. Back at square one
+- Common methods `equals()`, `hashCode()` and `toString()` fully implemented
+
+## 2026.04.14
+
+### Added
+
+- Helper method `customSort()` to support the `SongSelector` sorting methods
+- Created a `Song` record that takes song title and constant parameters
+
+### Updated
+
+- `SongSelector` component takes a `Song` generic type exclusively; interfaces and abstract class updated accordingly
+
+## 2026.04.13
+
+### Added
+
+- Common methods to SongSelectorSecondary (equals, hashCode, toString)
+
+## 2026.03.31
+
+### Added
+
+- Designed abstract class (SongSelectorSecondary) for SongSelector component
+- Added enum classes `SongSort` and `ConstantSort` to SongSelector interface
+
+### Updated
+
+- Updated SongSelectorKernel interface to extend `Iterable<SongSelector<S, C>>`
+- Updated SongSelector `sortBySongName()` and `sortByConstant()` method parameters from Comparator<S> and Comparator<C> to enum classes SongSort and ConstantSort
+
 ## 2026.03.09
 
 ### Added

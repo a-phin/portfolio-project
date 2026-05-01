@@ -3,45 +3,41 @@ import java.util.Comparator;
 /**
  * {@code SongSelectorKernel} enhanced with secondary methods.
  *
- * @param <S>
- *            type of {@code SongSelectorKernel} domain (song) entries
- * @param <C>
- *            type of {@code SongSelectorKernel} range (constant) entries
+ * @param <Song>
+ *            type of {@code SongSelector} entries
  */
-public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
+public interface SongSelector<Song> extends SongSelectorKernel<Song> {
 
     /**
-     * A SongSelector entry (song-constant pair.) The only ways to obtain a
-     * SongSelector entry are from the iterator and {@code SongSelector}'s
-     * {@code remove} methods.
-     *
-     * @param <S>
-     *            type of {@code SongSelectorKernel} domain (song) entries
-     * @param <C>
-     *            type of {@code SongSelectorKernel} range (constant) entries
-     * @mathmodel type Entry is modeled by (song: S, constant: C)
-     * @initially <pre>
-     * (S song, C constant):
-     *  ensures
-     *   this = (song, constant)
-     * </pre>
+     * Song order sort choices when passed as a parameter to sortBySongName.
      */
-    interface Entry<S, C> {
+    enum SongOrder {
         /**
-         * Returns this {@code Entry}'s song.
-         *
-         * @return the song
-         * @aliases reference returned by {@code song}
+         * When passed, sortBySongName sorts SongSelector in alphabetical order.
          */
-        S song();
+        ATOZ,
 
         /**
-         * Return this {@code Entry}'s constant.
-         *
-         * @return the constant
-         * @aliases reference returned by {@code constant}
+         * When passed, sortBySongName sorts SongSelector in reverse
+         * alphabetical order.
          */
-        C constant();
+        ZTOA;
+    }
+
+    /**
+     * Constant order sort choices when passed as a parameter to sortByConstant.
+     */
+    enum ConstantOrder {
+        /**
+         * When passed, sortByConstant sorts SongSelector from the lowest
+         * constant value to the highest constant value.
+         */
+        LOWESTTOHIGHEST,
+        /**
+         * When passed, sortByConstant sorts SongSelector from the highest
+         * constant value to the lowest constant value.
+         */
+        HIGHESTTOLOWEST;
     }
 
     /**
@@ -54,7 +50,7 @@ public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
      * @requires DOMAIN(this) intersection DOMAIN(sl) = {}
      * @ensures this = #this union #sl
      */
-    void combineSongList(SongSelector<S, C> sl);
+    void combineSongList(SongSelector<Song> sl);
 
     /**
      * Returns a new object with the same dynamic type as {@code this} with
@@ -63,10 +59,9 @@ public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
      * @param constant
      *            the constant whose associated songs are to be reported
      * @return {@code SongSelector} with songs that have {@code constant}
-     * @requires constant is in RANGE(this)
      * @ensures showSongs = #showSongs union {song, constant}
      */
-    SongSelector<S, C> showSongs(C constant);
+    SongSelector<Song> showSongs(int constant);
 
     /**
      * Sorts {@code this} according to the ordering provided by the compare
@@ -74,6 +69,8 @@ public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
      *
      * @param order
      *            ordering by which to sort the songs
+     * @param inReverseOrder
+     *            indicates if song selector ordering should be in reverse order
      * @updates this
      * @requires IS_TOTAL_PREORDER([relation computed by order.compare method])
      * @ensures <pre>
@@ -81,22 +78,7 @@ public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
      * IS_SORTED(this, [relation computed by order.compare method])
      * </pre>
      */
-    void sortBySongName(Comparator<S> order);
-
-    /**
-     * Sorts {@code this} according to the ordering provided by the compare
-     * method from {@code order}.
-     *
-     * @param order
-     *            ordering by which to sort the constants
-     * @updates this
-     * @requires IS_TOTAL_PREORDER([relation computed by order.compare] method)
-     * @ensures <pre>
-     * perms(this, #this) and
-     * IS_SORTED(this, [relation computed by order.compare method])
-     * </pre>
-     */
-    void sortByConstant(Comparator<C> order);
+    void sort(Comparator<Song> order, boolean inReverseOrder);
 
     /**
      * Reports if there is an entry in {@code this} whose second component is
@@ -108,24 +90,23 @@ public interface SongSelector<S, C> extends SongSelectorKernel<S, C> {
      *         is {@code constant}
      * @ensures hasConstant = (constant is in RANGE(this))
      */
-    boolean hasConstant(C constant);
+    boolean hasConstant(int constant);
 
     /**
      * Replaces the constant associated with {@code song}.
      *
-     * @param song
+     * @param s
      *            the song whose constant is replaced
-     * @param oldConstant
-     *            the constant associated with {@code song} to be replaced
-     * @param newConstant
-     *            the constant replacing {@code oldConstant}
+     * @param constant
+     *            the constant replacing the current song constant
      * @aliases reference {@code constant}
      * @updates this
-     * @requires song is in DOMAIN(this)
+     * @requires title is in this, constant > 0 and constant /= newConstant
      * @ensures <pre>
      * this = (#this \ {(song, newConstant)}) union {(song, oldConstant)}
      * and (song, newConstant) is in #this
      * </pre>
      */
-    void replaceConstant(S song, C oldConstant, C newConstant);
+    void replaceConstant(Song s, int constant);
+
 }

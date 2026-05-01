@@ -4,60 +4,65 @@ import components.standard.Standard;
  * Song selector kernel component with primary methods. (Note: by package-wide
  * convention, all references are non-null.)
  *
- * @param <S>
- *            type of {@code SongSelectorKernel} domain (song) entries
- * @param <C>
- *            type of {@code SongSelectorKernel} range (constant) entries
+ * @param <Song>
+ *            type of {@code SongSelectorKernel} songs
  */
-public interface SongSelectorKernel<S, C> extends Standard<SongSelector<S, C>> {
+public interface SongSelectorKernel<Song>
+        extends Standard<SongSelector<Song>>, Iterable<Song> {
 
     /**
-     * Inserts the pair ({@code song}, {@code constant}) to this.
+     * Inserts {@code s} to this.
      *
-     * @param song
-     *            the song name to be inserted
-     * @param constant
-     *            the associated constant value to be inserted
-     * @aliases references {@code song, constant}
+     * @param s
+     *            the song to be inserted
+     * @aliases references {@code s}
      * @updates this
-     * @ensures this = #this union {(song, constant)}
+     * @ensures this = #this union {s}
      */
-    void insert(S song, C constant);
+    void insert(Song s);
 
     /**
-     * Removes the pair ({@code song}, {@code constant}) and returns it.
+     * Removes the {@code song} and returns it.
      *
-     * @param song
-     *            the song name to be removed
-     * @param constant
-     *            the associated constant value to be removed
-     * @return the entry removed
+     * @param s
+     *            the song to be removed
+     * @return the song removed
      * @updates this
-     * @requires song is in DOMAIN(this)
+     * @requires song is in this
      * @ensures <pre>
-     * remove.song = song and
-     * remove is in #this and
-     * this = #this \ {remove}
+     * this = #this \ {s} and
+     * remove = s
      * </pre>
      */
-    SongSelector.Entry<S, C> remove(S song, C constant);
+    Song remove(Song s);
 
     /**
-     * Reports whether there is an entry in {@code this} whose first component
-     * is {code Song}.
+     * Removes and returns an arbitrary element from {@code this}.
      *
-     * @param song
-     *            the song name to look for
-     * @return true iff there is a pair in this whose first component is
-     *         {@code song}
-     * @ensures containsSong = (song is in DOMAIN(this))
+     * @return the song removed from {@code this}
+     * @updates this
+     * @requires |this| > 0
+     * @ensures <pre>
+     * removeAny is in #this and
+     * this = #this \ {removeAny}
+     * </pre>
      */
-    boolean containsSong(S song);
+    Song removeAny();
+
+    /**
+     * Reports whether {@code s} is in {@code this}.
+     *
+     * @param s
+     *            the song to look for
+     * @return true iff song is in {@code this}
+     * @ensures containsSong = (song is in this)
+     */
+    boolean containsSong(Song s);
 
     /**
      * Reports size of {@code this}.
      *
-     * @return the number of songs and its associated constants in {@code this}
+     * @return the number of songs in {@code this}
      * @ensures size = |this|
      */
     int size();
